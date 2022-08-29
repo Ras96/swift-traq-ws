@@ -1,17 +1,20 @@
 import Foundation
 
 public struct WsClient {
-    public let baseUrl: String
-    public let urlSession: URLSession
     public let webSocketTask: URLSessionWebSocketTask
 
-    public init(baseUrl: String = "wss://q.trap.jp/api/v3/ws") {
-        self.baseUrl = baseUrl
+    public init(webSocketTask: URLSessionWebSocketTask) {
+        self.webSocketTask = webSocketTask
+    }
+
+    public init(
+        baseUrl: String = "wss://q.trap.jp/api/v3/ws",
+        urlSession: URLSession = .init(configuration: .default)
+    ) {
         guard let url = URL(string: baseUrl) else {
             fatalError("invalid url")
         }
 
-        urlSession = URLSession(configuration: .default)
         webSocketTask = urlSession.webSocketTask(with: url)
     }
 
