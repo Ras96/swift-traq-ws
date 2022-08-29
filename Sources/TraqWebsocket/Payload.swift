@@ -52,79 +52,79 @@ public enum WsPayload: Decodable {
 
     public struct UserJoined: Decodable {
         /** 登録されたユーザーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct UserUpdated: Decodable {
         /** 情報が更新されたユーザーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct UserTagsUpdated: Decodable {
         /** タグが更新されたユーザーのId */
-        let id: UUID
+        public let id: UUID
         /** 更新されたタグのId */
-        let tagId: UUID
+        public let tagId: UUID
     }
 
     public struct UserIconUpdated: Decodable {
         /** アイコンが更新されたユーザーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct UserWebrtcStateChanged: Decodable {
         /** 変更があったユーザーのId */
-        let userId: UUID
+        public let userId: UUID
         /** ユーザーの変更後の接続チャンネルのId */
-        let channelId: UUID
+        public let channelId: UUID
         /** ユーザーの変更後の状態 */
-        let sessions: [Session]
+        public let sessions: [Session]
 
         public struct Session: Decodable {
             /** 状態 */
-            let state: String
+            public let state: String
             /** セッションID */
-            let sessionId: UUID
+            public let sessionId: UUID
         }
     }
 
     public struct UserViewstateChanged: Decodable {
         /** 変化したWSセッションを含めた、該当ユーザーの変更後の状態 */
-        let viewStates: [ViewState]
+        public let viewStates: [ViewState]
 
         public struct ViewState: Decodable {
             /** WSセッションの識別子 */
-            let key: String
+            public let key: String
             /** 閲覧しているチャンネルId */
-            let channelId: UUID
+            public let channelId: UUID
             /** 閲覧状態 */
-            let state: ChannelViewState
+            public let state: ChannelViewState
         }
     }
 
     public struct UserOnline: Decodable {
         /** オンラインになったユーザーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct UserOffline: Decodable {
         /** オフラインになったユーザーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct UserGroupCreated: Decodable {
         /** 作成されたユーザーグループのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct UserGroupUpdated: Decodable {
         /** 作成されたユーザーグループのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct UserGroupDeleted: Decodable {
         /** 削除されたユーザーグループのId */
-        let id: UUID
+        public let id: UUID
     }
 
     // channel payloads
@@ -141,176 +141,176 @@ public enum WsPayload: Decodable {
 
     public struct ChannelCreated: Decodable {
         /** 作成されたチャンネルのId */
-        let id: UUID
+        public let id: UUID
         /** (DMの場合のみ */
-        let dmUserId: UUID?
+        public let dmUserId: UUID?
     }
 
     public struct ChannelUpdated: Decodable {
         /** 変更があったチャンネルのId */
-        let id: UUID
+        public let id: UUID
         /** (DMの場合のみ */
-        let dmUserId: UUID?
+        public let dmUserId: UUID?
     }
 
     public struct ChannelDeleted: Decodable {
         /** 削除されたチャンネルのId */
-        let id: UUID
+        public let id: UUID
         /** (DMの場合のみ */
-        let dmUserId: UUID?
+        public let dmUserId: UUID?
     }
 
     public struct ChannelStared: Decodable {
         /** スターしたチャンネルのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct ChannelUnstared: Decodable {
         /** スターしたチャンネルのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct ChannelViewersChanged: Decodable {
         /** 変化したチャンネルのId */
-        let id: UUID
+        public let id: UUID
         /** 変化後の閲覧者 */
-        let viewers: [Viewer]
+        public let viewers: [Viewer]
 
         public struct Viewer: Decodable {
             /** ユーザーId */
-            let userId: UUID
+            public let userId: UUID
             /** 閲覧状態 */
-            let state: ChannelViewState
+            public let state: ChannelViewState
             /** 閲覧状態の更新日時 */
-            let updateAt: Date
+            public let updateAt: Date
         }
     }
 
     public struct ChannelSubscribersChanged: Decodable {
         /** 変化したチャンネルのId */
-        let id: UUID
+        public let id: UUID
     }
 
     // message payloads
 
     public struct MessageCreated: Decodable {
         /** 投稿されたメッセージのId */
-        let id: UUID
+        public let id: UUID
         /** 投稿されたメッセージがWebSocketを接続しているユーザーの投稿を引用しているかどうか */
-        let isCiting: Bool
+        public let isCiting: Bool
     }
 
     public struct MessageUpdated: Decodable {
         /** 更新されたメッセージのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct MessageDeleted: Decodable {
         /** 削除されたメッセージのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct MessageStamped: Decodable {
         /** メッセージId */
-        let messageId: UUID
+        public let messageId: UUID
         /** スタンプを押したユーザーのId */
-        let userId: UUID
+        public let userId: UUID
         /** スタンプのId */
-        let stampId: UUID
+        public let stampId: UUID
         /** そのユーザーが押した数 */
-        let count: Int
+        public let count: Int
         /** そのユーザーがそのスタンプをそのメッセージに最初に押した日時 */
-        let createdAt: Date
+        public let createdAt: Date
     }
 
     public struct MessageUnstamped: Decodable {
         /** メッセージId */
-        let messageId: UUID
+        public let messageId: UUID
         /** スタンプを押したユーザーのId */
-        let userId: UUID
+        public let userId: UUID
         /** スタンプのId */
-        let stampId: UUID
+        public let stampId: UUID
     }
 
     public struct MessagePinned: Decodable {
         /** ピンされたメッセージのID */
-        let messageId: UUID
+        public let messageId: UUID
         /** ピンされたメッセージのチャンネルID */
-        let channelId: UUID
+        public let channelId: UUID
     }
 
     public struct MessageUnpinned: Decodable {
         /** ピンが外されたメッセージのID */
-        let messageId: UUID
+        public let messageId: UUID
         /** ピンが外されたメッセージのチャンネルID */
-        let channelId: UUID
+        public let channelId: UUID
     }
 
     public struct MessageRead: Decodable {
         /** 読んだチャンネルId */
-        let id: UUID
+        public let id: UUID
     }
 
     // stamp payloads
 
     public struct StampCreated: Decodable {
         /** 作成されたスタンプのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct StampUpdated: Decodable {
         /** 修正されたスタンプのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct StampDeleted: Decodable {
         /** 削除されたスタンプのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct StampPaletteCreated: Decodable {
         /** 作成されたスタンプパレットのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct StampPaletteUpdated: Decodable {
         /** 修正されたスタンプパレットのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct StampPaletteDeleted: Decodable {
         /** 削除されたスタンプパレットのId */
-        let id: UUID
+        public let id: UUID
     }
 
     // clip payloads
 
     public struct ClipFolderCreated: Decodable {
         /** 作成されたクリップフォルダーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct ClipFolderUpdated: Decodable {
         /** 更新されたクリップフォルダーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct ClipFolderDeleted: Decodable {
         /** 削除されたクリップフォルダーのId */
-        let id: UUID
+        public let id: UUID
     }
 
     public struct ClipFolderMessageAdded: Decodable {
         /** メッセージが除外されたクリップフォルダーのId */
-        let folderId: UUID
+        public let folderId: UUID
         /** クリップフォルダーから除外されたメッセージのId */
-        let messageId: UUID
+        public let messageId: UUID
     }
 
     public struct ClipFolderMessageDeleted: Decodable {
         /** メッセージが追加されたクリップフォルダーのId */
-        let folderId: UUID
+        public let folderId: UUID
         /** クリップフォルダーに追加されたメッセージのId */
-        let messageId: UUID
+        public let messageId: UUID
     }
 }
