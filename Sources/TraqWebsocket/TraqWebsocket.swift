@@ -22,7 +22,7 @@ public struct WsClient {
         webSocketTask.resume()
     }
 
-    public func onEvent (type: WsType, completion: @escaping (WsEvent) -> Void) {
+    public func onEvents(completion: @escaping (WsEvent) -> Void) {
         webSocketTask.receive { result in
             switch result {
             case .success(let message):
@@ -33,9 +33,7 @@ public struct WsClient {
                         let decoder = JSONDecoder()
                         decoder.keyDecodingStrategy = .convertFromSnakeCase
                         let event = try decoder.decode(WsEvent.self, from: jsonData)
-                        if event.type == type {
-                            completion(event)
-                        }
+                        completion(event)
                     } catch {
                         print(error)
                     }
@@ -45,10 +43,18 @@ public struct WsClient {
                     fatalError("unknown type")
                 }
 
-                // run onEvent(type:completion:) recursively
-                onEvent(type: type, completion: completion)
+                // run onEvents(completion:) recursively
+                onEvents(completion: completion)
             case .failure(let error):
                 print(error)
+            }
+        }
+    }
+
+    public func onEvent (type: WsType, completion: @escaping (WsEvent) -> Void) {
+        onEvents { event in
+            if event.type == type {
+                completion(event)
             }
         }
     }
