@@ -27,7 +27,9 @@ public struct WsClient {
                 case .string(let text):
                     guard let jsonData = text.data(using: .utf8) else { return }
                     do {
-                        let event = try JSONDecoder().decode(WsEvent.self, from: jsonData)
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let event = try decoder.decode(WsEvent.self, from: jsonData)
                         if event.type == type {
                             completion(event)
                         }

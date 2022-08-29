@@ -38,10 +38,10 @@ public struct WsEvent: Decodable {
             self.body = .userGroupDeleted(try values.decode(WsPayload.UserGroupDeleted.self, forKey: .body))
         case .channelCreated:
             self.body = .channelCreated(try values.decode(WsPayload.ChannelCreated.self, forKey: .body))
-        case .channelDeleted:
-            self.body = .channelDeleted(try values.decode(WsPayload.ChannelDeleted.self, forKey: .body))
         case .channelUpdated:
             self.body = .channelUpdated(try values.decode(WsPayload.ChannelUpdated.self, forKey: .body))
+        case .channelDeleted:
+            self.body = .channelDeleted(try values.decode(WsPayload.ChannelDeleted.self, forKey: .body))
         case .channelStared:
             self.body = .channelStared(try values.decode(WsPayload.ChannelStared.self, forKey: .body))
         case .channelUnstared:
@@ -56,8 +56,6 @@ public struct WsEvent: Decodable {
             self.body = .messageUpdated(try values.decode(WsPayload.MessageUpdated.self, forKey: .body))
         case .messageDeleted:
             self.body = .messageDeleted(try values.decode(WsPayload.MessageDeleted.self, forKey: .body))
-        case .messageRead:
-            self.body = .messageRead(try values.decode(WsPayload.MessageRead.self, forKey: .body))
         case .messageStamped:
             self.body = .messageStamped(try values.decode(WsPayload.MessageStamped.self, forKey: .body))
         case .messageUnstamped:
@@ -66,6 +64,8 @@ public struct WsEvent: Decodable {
             self.body = .messagePinned(try values.decode(WsPayload.MessagePinned.self, forKey: .body))
         case .messageUnpinned:
             self.body = .messageUnpinned(try values.decode(WsPayload.MessageUnpinned.self, forKey: .body))
+        case .messageRead:
+            self.body = .messageRead(try values.decode(WsPayload.MessageRead.self, forKey: .body))
         case .stampCreated:
             self.body = .stampCreated(try values.decode(WsPayload.StampCreated.self, forKey: .body))
         case .stampUpdated:
@@ -108,8 +108,8 @@ public enum WsType: String, Decodable {
 
     // channel events
     case channelCreated = "CHANNEL_CREATED"
-    case channelDeleted = "CHANNEL_DELETED"
     case channelUpdated = "CHANNEL_UPDATED"
+    case channelDeleted = "CHANNEL_DELETED"
     case channelStared = "CHANNEL_STARED"
     case channelUnstared = "CHANNEL_UNSTARED"
     case channelViewersChanged = "CHANNEL_VIEWERS_CHANGED"
@@ -119,11 +119,11 @@ public enum WsType: String, Decodable {
     case messageCreated = "MESSAGE_CREATED"
     case messageUpdated = "MESSAGE_UPDATED"
     case messageDeleted = "MESSAGE_DELETED"
-    case messageRead = "MESSAGE_READ"
     case messageStamped = "MESSAGE_STAMPED"
     case messageUnstamped = "MESSAGE_UNSTAMPED"
     case messagePinned = "MESSAGE_PINNED"
     case messageUnpinned = "MESSAGE_UNPINNED"
+    case messageRead = "MESSAGE_READ"
 
     // stamp events
     case stampCreated = "STAMP_CREATED"
