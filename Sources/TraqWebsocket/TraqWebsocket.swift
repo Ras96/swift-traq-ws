@@ -22,6 +22,8 @@ public struct WsClient {
         webSocketTask.resume()
     }
 
+    public struct ErrorInvalidJSON: Error {}
+
     public func onEvents(completion: @escaping (WsEvent) -> Void) {
         webSocketTask.receive { result in
             switch result {
@@ -57,5 +59,21 @@ public struct WsClient {
                 completion(event)
             }
         }
+    }
+
+    public func receiveEvent() async throws -> WsEvent {
+        let message = try await webSocketTask.receive()
+        guard case let .string(text) = message else {
+            throw ErrorInvalidJSON()
+        }
+
+        guard let jsonData = text.data(using: .utf8) else {
+            throw ErrorInvalidJSON()
+        }
+
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let event = try decoder.decode(WsEvent.self, from: jsonData)
+        return event
     }
 }
