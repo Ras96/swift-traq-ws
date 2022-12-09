@@ -2,7 +2,7 @@
 
 Swift client library for the traQ **Websocket** API.
 
-- for other API: [Ras96/swift-traq](https://github.com/traPtitech/swift-traq)
+- for other API: [traPtitech/swift-traq](https://github.com/traPtitech/swift-traq)
 - API spec: [traP Swagger Viewer](https://apis.trap.jp/#/notification/ws)
 
 Please install this package by SPM.
